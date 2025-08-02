@@ -37,11 +37,21 @@ const testimonialsModalFunc = function () {
 for (let i = 0; i < testimonialsItem.length; i++) {
 
   testimonialsItem[i].addEventListener("click", function () {
+    
+    const avatar = this.querySelector("[data-testimonials-avatar]");
+    const title = this.querySelector("[data-testimonials-title]");
+    const text = this.querySelector("[data-testimonials-text]");
 
-    modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
-    modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
-    modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
-    modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
+    if (modalImg && avatar) {
+      modalImg.src = avatar.src;
+      modalImg.alt = avatar.alt;
+    }
+    if (modalTitle && title) {
+      modalTitle.innerHTML = title.innerHTML;
+    }
+    if (modalText && text) {
+      modalText.innerHTML = text.innerHTML;
+    }
 
     testimonialsModalFunc();
 
@@ -50,8 +60,12 @@ for (let i = 0; i < testimonialsItem.length; i++) {
 }
 
 // add click event to modal close button
-modalCloseBtn.addEventListener("click", testimonialsModalFunc);
-overlay.addEventListener("click", testimonialsModalFunc);
+if (modalCloseBtn) {
+  modalCloseBtn.addEventListener("click", testimonialsModalFunc);
+}
+if (overlay) {
+  overlay.addEventListener("click", testimonialsModalFunc);
+}
 
 
 
@@ -156,4 +170,35 @@ for (let i = 0; i < navigationLinks.length; i++) {
     }
 
   });
+}
+
+// Project description toggle functionality
+function toggleDescription(element) {
+  const fullDesc = element.querySelector('.full-desc');
+  const shortDesc = element.querySelector('.short-desc');
+  
+  if (fullDesc && shortDesc) {
+    if (fullDesc.classList.contains('hidden')) {
+      // Show full description
+      fullDesc.classList.remove('hidden');
+      shortDesc.style.display = 'none';
+      
+      // Smooth scroll adjustment if needed
+      setTimeout(() => {
+        const elementRect = element.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        
+        if (elementRect.bottom > viewportHeight) {
+          element.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'nearest' 
+          });
+        }
+      }, 300);
+    } else {
+      // Show short description
+      fullDesc.classList.add('hidden');
+      shortDesc.style.display = 'block';
+    }
+  }
 }

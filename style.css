@@ -595,11 +595,35 @@ main {
   font-size: var(--fs-6);
   font-weight: var(--fw-300);
   line-height: 1.6;
-  display: -webkit-box;
-  line-clamp: 4;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.testimonials-text .short-desc {
+  display: block;
+  margin-bottom: 0;
+}
+
+.testimonials-text .full-desc {
+  max-height: 0;
   overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
+  margin-top: 0;
+}
+
+.testimonials-text .full-desc:not(.hidden) {
+  max-height: 500px;
+  opacity: 1;
+  margin-top: 15px;
+}
+
+.testimonials-text .full-desc.hidden {
+  display: none;
+}
+
+.testimonials-text:hover {
+  color: var(--white-2);
 }
 
 
@@ -1868,8 +1892,8 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 
   /**
-	 * RESUME
-	 */
+         * RESUME
+         */
 
   .timeline-text { max-width: 700px; }
 
