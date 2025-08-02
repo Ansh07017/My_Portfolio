@@ -1,6 +1,5 @@
-==============================
+
 Personal Portfolio Website
-==============================
 
 Welcome to my Portfolio Website repository! This is a personal project built to
 showcase my skills, projects, education, experience, and contact details in a
